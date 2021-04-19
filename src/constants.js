@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product'
