@@ -8,7 +8,9 @@ const ProductDetailPage = () => {
   return (
     <>
       <NavBar/>
-      <ProductDetailCard id={id}/>
+      <div style={{justifyContent: 'center', marginTop: '142px'}}>
+        <ProductDetailCard id={id}/>
+      </div>
     </>
   )
 }
