@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import AddToCartButton from '../AddToCartButton'
 import BookmarkButton from '../BookmarkButton'
 import MessageModal from '../MessageModal'
-import useModal from '../compability/modal.hooks'
+import ModalContext from '../compability/modal.context'
 
-const ProductItemCard = (item) => {
+const ProductItemCard = (value, index) => {
   const {
     productName,
     handleClickCart, handleClickBookmark,
     visibleModal, visibleModalBookmark,
     handleClose, handleCloseBookmark
-  } = useModal()
+  } = useContext(ModalContext)
+  const item = value.value
   return (
-      <Link to={`product/${item.item.id}`}>
+    <Col value={item} key={index} md={4} sm={12} >
+      <Link to={`product/${item.id}`}>
         <Row className="mb-5">
           <Col className="justify-content-md-center" md={3}>
             <div>
@@ -49,12 +51,27 @@ const ProductItemCard = (item) => {
               </Row>
             </div>
             <Row className="ml-1">
-              {/* <AddToCartButton handleClickButton={(e) => handleClickCart(item.name, e)} textSize="12px"/>                    
-              <BookmarkButton handleClickButton={(e) => handleClickBookmark(item.name, e)}/> */}
+              <AddToCartButton handleClickButton={(e) => handleClickCart(item.name, e)} textSize="12px"/>                    
+              <BookmarkButton handleClickButton={(e) => handleClickBookmark(item.name, e)}/>
             </Row>
           </Col>
         </Row>
       </Link>
+      <MessageModal
+        visibleModal={visibleModal}
+        handleClose={handleClose}
+        message="is added to cart"
+        productName={productName}
+        isSuccess={true}
+      />
+      <MessageModal
+        visibleModal={visibleModalBookmark}
+        handleClose={handleCloseBookmark}
+        message="is bookmarked"
+        productName={productName}
+        isSuccess={true}
+      />
+    </Col>
   )
 }
 

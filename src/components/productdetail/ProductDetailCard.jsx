@@ -5,7 +5,6 @@ import { Col } from 'react-bootstrap'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import useProductDetail from './product-detail.hooks'
-// import useModal from '../compability/modal.hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import Spinner from 'react-bootstrap/Spinner'
@@ -23,12 +22,6 @@ const ProductDetailCard = () => {
     visibleModal, visibleModalBookmark,
     handleClose, handleCloseBookmark
   } = useContext(ModalContext)
-  // const {
-  //   productName,
-  //   handleClickCart, handleClickBookmark,
-  //   visibleModal, visibleModalBookmark,
-  //   handleClose, handleCloseBookmark
-  // } = useModal()
 
   const quantity = () => {
     if (productDetail.qty <= 5 && productDetail.qty > 0) {
@@ -52,7 +45,7 @@ const ProductDetailCard = () => {
     <Card>
       <Row className="p-3 mx-5">
         <Col className="text-center align-middle" md={3} lg={3}>
-          <img style={{width: '60%'}} src={productDetail.image}/>
+          <img style={{width: '60%'}} src={productDetail.image} alt="wine bottle"/>
         </Col>
         <Col md={9} lg={9}>
           <div className="h3">{productDetail.name}</div>

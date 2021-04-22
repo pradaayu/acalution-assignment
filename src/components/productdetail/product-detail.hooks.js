@@ -13,7 +13,7 @@ const useProductDetail = () => {
   const handleCloseError = () => setVisibleModalError(false)
   useEffect(() => {
     getProductDetail(id)
-  }, [])
+  }, [id])
 
   const getProductDetail = async (id) => {
     setLoading(true)

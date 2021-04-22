@@ -1,15 +1,14 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AddToCartButton from '../AddToCartButton'
 import BookmarkButton from '../BookmarkButton'
 import useProductList from './product-list.hooks'
-import useModal from '../compability/modal.hooks'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import MessageModal from '../MessageModal'
-// import ProductItemCard from './ProductItemCard'
+import ModalContext from '../compability/modal.context'
 
 const ProductCard = () => {
   const [page, setPage] = useState(1)
@@ -17,14 +16,14 @@ const ProductCard = () => {
   const {
     productList, errorMessage,
     visibleModalError, handleCloseError, 
-    loading, error, loadMore, totalPage
+    loading, error, loadMore
   } = useProductList(page)
   const {
     productName,
     handleClickCart, handleClickBookmark,
     visibleModal, visibleModalBookmark,
     handleClose, handleCloseBookmark
-  } = useModal()
+  } = useContext(ModalContext)
   const lastProductElementRef = useCallback(node => {
     // console.log('node', node)
     if (loading) return
