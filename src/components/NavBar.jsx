@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
@@ -50,7 +50,7 @@ const NavBar = () => {
           <Nav.Link ><div className="mr-3" style={{color: 'white', fontSize: '14px'}}>SIGN UP</div></Nav.Link>
           <Nav.Link><div className="mr-3" style={{color: 'white' , fontSize: '14px'}}>LOG IN</div></Nav.Link>
           <Nav.Link><div style={{color: 'white'}}>
-            <FontAwesomeIcon icon={faShoppingCart} color="white" size="md" />
+            <FontAwesomeIcon icon={faShoppingCart} color="white" size="1x" />
           </div></Nav.Link>
         </Nav>
       </Navbar>

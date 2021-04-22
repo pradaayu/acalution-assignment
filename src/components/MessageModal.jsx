@@ -3,21 +3,23 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 const MessageModal = (props) => {
-  const { visibleModal, handleClose, message, productName } = props
+  const { visibleModal, handleClose, message, productName, isSuccess } = props
   return (
     <>
       <Modal show={visibleModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Success</Modal.Title>
+          <Modal.Title>
+            {isSuccess ? 'Success' : 'Error'}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{productName} {message}</Modal.Body>
+        <Modal.Body>
+          {/* {productName} {message} */}
+          {isSuccess ? `${productName} ${message}` : `${message}`}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          {/* <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button> */}
         </Modal.Footer>
       </Modal>
     </>
