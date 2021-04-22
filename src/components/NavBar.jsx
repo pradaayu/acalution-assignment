@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Row from 'react-bootstrap/Row'
@@ -6,12 +6,15 @@ import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faShoppingCart, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { useLocation, useHistory } from 'react-router-dom'
+import ModalContext from './compability/modal.context'
  
 const NavBar = () => {
   const { pathname } = useLocation()
+  const { countItem } = useContext(ModalContext)
   const history = useHistory()
   const goBack = () => { history.goBack()}
   const buttonCustom = () => {
@@ -46,11 +49,20 @@ const NavBar = () => {
             <Button style={{color: '#CC962C'}} type="link" variant="link">SEARCH</Button>
           </Row>
         </Form>   
-        <Nav style={{color: 'white', position: 'relative', right: '-5vw'}}>
-          <Nav.Link ><div className="mr-3" style={{color: 'white', fontSize: '14px'}}>SIGN UP</div></Nav.Link>
-          <Nav.Link><div className="mr-3" style={{color: 'white' , fontSize: '14px'}}>LOG IN</div></Nav.Link>
+        <Nav className="align-middle" style={{color: 'white', position: 'relative', right: '-5vw'}}>
+          <Nav.Link ><div className="mr-3 pt-2" style={{color: 'white', fontSize: '14px'}}>SIGN UP</div></Nav.Link>
+          <Nav.Link><div className="mr-3 pt-2" style={{color: 'white' , fontSize: '14px'}}>LOG IN</div></Nav.Link>
           <Nav.Link><div style={{color: 'white'}}>
-            <FontAwesomeIcon icon={faShoppingCart} color="white" size="1x" />
+            <Button variant="flat">
+              <FontAwesomeIcon icon={faShoppingCart} color="white" size="1x"/>
+              {
+                countItem > 0 ? 
+                <span className="bg-secondary">
+                  <Badge>{countItem}</Badge>
+                </span> : ''
+              }
+            </Button>
+            {/* <FontAwesomeIcon icon={faShoppingCart} color="white" size="1x"/> */}
           </div></Nav.Link>
         </Nav>
       </Navbar>

@@ -1,24 +1,34 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import AddToCartButton from '../AddToCartButton'
 import BookmarkButton from '../BookmarkButton'
 import { Col } from 'react-bootstrap'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import useProductDetail from './product-detail.hooks'
-import useProductList from '../productlist/product-list.hooks'
+// import useModal from '../compability/modal.hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
+import Spinner from 'react-bootstrap/Spinner'
 import MessageModal from '../MessageModal'
+import ModalContext from '../compability/modal.context'
 
-const ProductDetailCard = ({id}) => {
-  const { productDetail } = useProductDetail(id)
+const ProductDetailCard = () => {
   const {
-    productName, loading, error,
+    productDetail, loading,
+    error, errorMessage, visibleModalError, handleCloseError 
+  } = useProductDetail()
+  const {
+    productName,
     handleClickCart, handleClickBookmark,
     visibleModal, visibleModalBookmark,
-    handleClose, handleCloseBookmark,
-    visibleModalError, handleCloseError
-  } = useProductList()
+    handleClose, handleCloseBookmark
+  } = useContext(ModalContext)
+  // const {
+  //   productName,
+  //   handleClickCart, handleClickBookmark,
+  //   visibleModal, visibleModalBookmark,
+  //   handleClose, handleCloseBookmark
+  // } = useModal()
 
   const quantity = () => {
     if (productDetail.qty <= 5 && productDetail.qty > 0) {
@@ -95,6 +105,24 @@ const ProductDetailCard = ({id}) => {
           </div>
         </Col>
       </Row>
+      {
+        loading && 
+        <Row className="text-center justify-content-center">
+          <Spinner animation="grow"></Spinner>
+          <Spinner animation="grow"></Spinner>
+          <Spinner animation="grow"></Spinner>
+        </Row>
+      }
+      {
+        error &&
+        <MessageModal
+          visibleModal={visibleModalError}
+          handleClose={handleCloseError}
+          message={errorMessage}
+          productName=""
+          isSuccess={false}
+        />
+      }
       <MessageModal
         visibleModal={visibleModal}
         handleClose={handleClose}
